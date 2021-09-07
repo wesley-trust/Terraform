@@ -6,7 +6,7 @@ trigger:
     - develop
   paths:
     include:
-      - Modules/Deployments/Resource_group
+      - Deployments/Resource_group
 
 # Do not trigger builds on PRs
 pr: none

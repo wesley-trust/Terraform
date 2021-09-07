@@ -28,7 +28,7 @@ stages:
         command: 'custom'
         customCommand: 'mod'
         arguments: 'init $(Module)'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/Modules/Deployments/$(Module)/tests'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
 
     # Add module dependencies
     - task: Go@0
@@ -37,7 +37,7 @@ stages:
         command: 'custom'
         customCommand: 'mod'
         arguments: 'tidy'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/Modules/Deployments/$(Module)/tests'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
         
     # Run Go Test
     - task: Go@0
@@ -45,7 +45,7 @@ stages:
       inputs:
         command: 'test'
         arguments: '-v integration_test.go'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/Modules/Deployments/$(Module)/tests'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
       env:
           ARM_TENANT_ID: $(TenantId)
           ARM_CLIENT_ID: $(ServicePrincipalId)
