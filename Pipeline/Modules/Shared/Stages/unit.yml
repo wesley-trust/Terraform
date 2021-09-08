@@ -1,6 +1,6 @@
 stages:
 - stage: Unit
-  condition: ne(variables['Build.Reason'], 'PullRequest')
+  condition: or(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.Reason'], 'Manual')
   pool:
     vmImage: 'ubuntu-latest'
   jobs:
