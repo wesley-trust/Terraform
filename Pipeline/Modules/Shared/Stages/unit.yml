@@ -1,11 +1,12 @@
 stages:
 - stage: Unit
+  condition: ne(variables['Build.Reason'], 'PullRequest')
   pool:
     vmImage: 'ubuntu-latest'
   jobs:
   
   - job: Test
-    displayName: 'Unit Test'
+    displayName: 'Test'
     continueOnError: false
     steps:
 

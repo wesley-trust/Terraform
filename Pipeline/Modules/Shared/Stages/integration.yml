@@ -1,11 +1,12 @@
 stages:
 - stage: Integration
+  condition: eq(variables['Build.Reason'], 'PullRequest')
   pool:
     vmImage: 'ubuntu-latest'
   jobs:
   
   - job: Test
-    displayName: 'Integration Test'
+    displayName: 'Test'
     continueOnError: false
     steps:
 
