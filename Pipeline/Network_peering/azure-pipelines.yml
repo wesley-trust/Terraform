@@ -1,0 +1,21 @@
+# Trigger builds on commits and merges to branch
+trigger:
+  batch: true
+  branches:
+    include:
+    - develop
+  paths:
+    include:
+      - Deployments/Network_peering
+
+# Trigger builds on PRs to branch
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+      - Deployments/Network_peering
+
+extends:
+  template: ../Shared/azure-pipelines.yml

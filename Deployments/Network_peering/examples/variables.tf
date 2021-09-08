@@ -27,3 +27,9 @@ variable "service_location" {
     ]
   }
 }
+
+variable "resource_network_peer_role" {
+  description = "The peering type"
+  type        = string
+  default = "spoke"
+}
