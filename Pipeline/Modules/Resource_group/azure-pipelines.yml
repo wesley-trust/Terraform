@@ -8,8 +8,14 @@ trigger:
     include:
       - Deployments/Resource_group
 
-# Do not trigger builds on PRs
-pr: none
+# Trigger builds on PRs to branch
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+      - Deployments/Resource_group
 
 extends:
-  template: ../../Shared/azure-pipelines.yml
+  template: ../Shared/azure-pipelines.yml
