@@ -1,8 +1,8 @@
 module "windows_virtual_machine" {
   for_each                = toset(local.resource_locations)
-  source                  = "../Modules/Deployments/Windows_virtual_machine"
-  service_environment     = terraform.workspace
-  service_deployment      = "01"
+  source                  = "../"
+  service_environment     = var.service_environment
+  service_deployment      = var.service_deployment
   service_name            = var.service_name
   service_location        = each.value
   resource_name           = local.resource_name
