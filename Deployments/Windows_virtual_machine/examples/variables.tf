@@ -31,7 +31,7 @@ variable "resource_name" {
   description = "Desired name for the provisioned resources"
   type        = map(string)
   default = {
-    "Services" = "TEST"
+    "Services" = "TST"
   }
 }
 
