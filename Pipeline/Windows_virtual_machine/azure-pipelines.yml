@@ -1,0 +1,21 @@
+# Trigger builds on commits and merges to branch
+trigger:
+  batch: true
+  branches:
+    include:
+    - develop
+  paths:
+    include:
+      - Deployments/Windows_virtual_machine
+
+# Trigger builds on PRs to branch
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+      - Deployments/Windows_virtual_machine
+
+extends:
+  template: ../Shared/azure-pipelines.yml
