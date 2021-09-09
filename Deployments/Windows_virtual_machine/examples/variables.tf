@@ -5,6 +5,12 @@ variable "service_name" {
   default     = "Services"
 }
 
+variable "service_environment" {
+  description = "Desired environment for the service collection of provisioned resources"
+  type        = string
+  default = "Test"
+}
+
 variable "service_location" {
   description = "The production resource locations to deploy"
   type        = map(any)
@@ -25,7 +31,7 @@ variable "resource_name" {
   description = "Desired name for the provisioned resources"
   type        = map(string)
   default = {
-    "Services" = "TEST"
+    "Services" = "TST"
   }
 }
 
@@ -34,7 +40,7 @@ variable "resource_instance_count" {
   type        = map(any)
   default = {
     Test = {
-      "DirectoryServices" = 2
+      "Services" = 2
     }
   }
 }
