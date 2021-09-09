@@ -1,9 +1,11 @@
-# Trigger builds on commits and merges to branch
+# Trigger builds on commits and merges to all branches, excluding specified branches
 trigger:
   batch: true
   branches:
     include:
-    - develop
+    - '*'
+    exclude:
+    - main
   paths:
     include:
       - Deployments/Windows_virtual_machine

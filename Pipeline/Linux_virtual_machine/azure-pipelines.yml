@@ -8,7 +8,7 @@ trigger:
     - main
   paths:
     include:
-      - Deployments/Network_peering
+      - Deployments/Linux_virtual_machine
 
 # Trigger builds on PRs to branch
 pr:
@@ -17,7 +17,7 @@ pr:
     - main
   paths:
     include:
-      - Deployments/Network_peering
+      - Deployments/Linux_virtual_machine
 
 extends:
   template: ../Shared/azure-pipelines.yml

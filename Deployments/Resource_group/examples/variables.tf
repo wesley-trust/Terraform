@@ -8,7 +8,7 @@ variable "service_name" {
 variable "service_environment" {
   description = "Desired environment for the service collection of provisioned resources"
   type        = string
-  default = "Test"
+  default     = "Test"
 }
 
 variable "service_deployment" {
@@ -19,5 +19,5 @@ variable "service_deployment" {
 variable "service_location" {
   description = "The production resource locations to deploy"
   type        = string
-  default = "UK South"
+  default     = "UK South"
 }
