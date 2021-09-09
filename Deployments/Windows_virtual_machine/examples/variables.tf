@@ -40,7 +40,7 @@ variable "resource_instance_count" {
   type        = map(any)
   default = {
     Test = {
-      "DirectoryServices" = 2
+      "Services" = 2
     }
   }
 }
