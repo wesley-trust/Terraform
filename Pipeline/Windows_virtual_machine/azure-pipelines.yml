@@ -1,3 +1,7 @@
+# Define specific variables
+variables:
+  Module: 'Windows_virtual_machine'
+
 # Trigger builds on commits and merges to branch
 trigger:
   batch: true
