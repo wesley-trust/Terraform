@@ -27,10 +27,16 @@ func TestIntegrationExample(t *testing.T) {
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
 		},
+
+		// Variables to pass to the Terraform code using -var options
+		Targets: []string{
+			"module.windows_virtual_machine_spoke",
+			"module.linux_virtual_machine_spoke",
+		},
 	})
 
 	// At the end of the test, run `terraform destroy` to clean up any resources that were created
-	//defer terraform.Destroy(t, terraformOptions)
+	defer terraform.Destroy(t, terraformOptions)
 
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
