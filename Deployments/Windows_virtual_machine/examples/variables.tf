@@ -79,3 +79,18 @@ variable "resource_network_role" {
   type        = string
   default     = "spoke"
 }
+
+variable "resource_data_disk_count" {
+  description = "Desired size for the provisioned resources for each service"
+  type        = number
+}
+
+variable "resource_network_interface_count" {
+  description = "Desired number of network interfaces"
+  type        = string
+}
+
+variable "provision_public_load_balancer" {
+  description = "Whether to provision a public load balancer"
+  type        = bool
+}

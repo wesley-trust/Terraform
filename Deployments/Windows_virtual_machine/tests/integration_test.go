@@ -5,49 +5,13 @@ import (
 
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	//"github.com/stretchr/testify/assert"
 )
 
-/* func TestIntegrationAll(t *testing.T) {
+func TestSingleInstanceSingleRegion(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
-
-	// Concatenate expected resource group name
-	//resourceGroupName := "Services-Test-UKS-" + uniqueID + "-rg"
-
-	// Enable retryable error
-	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-
-		// The path to where the Terraform code is located
-		TerraformDir: "../examples/",
-
-		// Variables to pass to the Terraform code using -var options
-		Vars: map[string]interface{}{
-			"service_deployment": uniqueID,
-		},
-	})
-
-	// At the end of the test, run `terraform destroy` to clean up any resources that were created
-	defer terraform.Destroy(t, terraformOptions)
-
-	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
-	terraform.InitAndApply(t, terraformOptions)
-
-	// Run `terraform output` to get the values of output variables
-	//output := terraform.Output(t, terraformOptions, "resourceGroupName")
-	//assert.Equal(t, resourceGroupName, output)
-} */
-
-func TestIntegrationSingleInstanceSingleRegion(t *testing.T) {
-	t.Parallel()
-
-	// Generate a random ID to prevent a naming conflict
-	uniqueID := random.UniqueId()
-
-	// Concatenate expected resource group name
-	//resourceGroupName := "Services-Test-UKS-" + uniqueID + "-rg"
 
 	// Define variables
 	locations := []string{"UK South"}
@@ -71,23 +35,16 @@ func TestIntegrationSingleInstanceSingleRegion(t *testing.T) {
 
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
-
-	// Run `terraform output` to get the values of output variables
-	//output := terraform.Output(t, terraformOptions, "resourceGroupName")
-	//assert.Equal(t, resourceGroupName, output)
 }
 
-func TestIntegrationMultiInstanceSingleRegion(t *testing.T) {
+func TestMultiInstanceMultiRegion(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
 
-	// Concatenate expected resource group name
-	//resourceGroupName := "Services-Test-UKS-" + uniqueID + "-rg"
-
 	// Define variables
-	locations := []string{"UK South"}
+	locations := []string{"UK South", "North Central US"}
 
 	// Enable retryable error
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
@@ -108,20 +65,16 @@ func TestIntegrationMultiInstanceSingleRegion(t *testing.T) {
 
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
-
-	// Run `terraform output` to get the values of output variables
-	//output := terraform.Output(t, terraformOptions, "resourceGroupName")
-	//assert.Equal(t, resourceGroupName, output)
 }
 
-func TestIntegrationMultiInstanceMultiRegion(t *testing.T) {
+func TestMultiInstanceMultiRegionWithLB(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
 
-	// Concatenate expected resource group name
-	//resourceGroupName := "Services-Test-UKS-" + uniqueID + "-rg"
+	// Define variables
+	locations := []string{"UK South", "North Central US"}
 
 	// Enable retryable error
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
@@ -133,7 +86,8 @@ func TestIntegrationMultiInstanceMultiRegion(t *testing.T) {
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
 			"resource_instance_count": 2,
-			"service_location": []string{"UK South", "North Central US"},
+			"service_location": locations,
+			"provision_public_load_balancer": true,
 		},
 	})
 
@@ -142,8 +96,66 @@ func TestIntegrationMultiInstanceMultiRegion(t *testing.T) {
 
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
+}
 
-	// Run `terraform output` to get the values of output variables
-	//output := terraform.Output(t, terraformOptions, "resourceGroupName")
-	//assert.Equal(t, resourceGroupName, output)
+func TestMultiInstanceMultiRegionWithDataDisks(t *testing.T) {
+	t.Parallel()
+
+	// Generate a random ID to prevent a naming conflict
+	uniqueID := random.UniqueId()
+
+	// Define variables
+	locations := []string{"UK South", "North Central US"}
+
+	// Enable retryable error
+	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+
+		// The path to where the Terraform code is located
+		TerraformDir: "../examples/",
+
+		// Variables to pass to the Terraform code using -var options
+		Vars: map[string]interface{}{
+			"service_deployment": uniqueID,
+			"resource_instance_count": 2,
+			"service_location": locations,
+			"resource_data_disk_count": 2,
+		},
+	})
+
+	// At the end of the test, run `terraform destroy` to clean up any resources that were created
+	defer terraform.Destroy(t, terraformOptions)
+
+	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
+	terraform.InitAndApply(t, terraformOptions)
+}
+
+func TestMultiInstanceMultiRegionWithMultiNI(t *testing.T) {
+	t.Parallel()
+
+	// Generate a random ID to prevent a naming conflict
+	uniqueID := random.UniqueId()
+
+	// Define variables
+	locations := []string{"UK South", "North Central US"}
+
+	// Enable retryable error
+	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+
+		// The path to where the Terraform code is located
+		TerraformDir: "../examples/",
+
+		// Variables to pass to the Terraform code using -var options
+		Vars: map[string]interface{}{
+			"service_deployment": uniqueID,
+			"resource_instance_count": 2,
+			"service_location": locations,
+			"resource_network_interface_count": 2,
+		},
+	})
+
+	// At the end of the test, run `terraform destroy` to clean up any resources that were created
+	defer terraform.Destroy(t, terraformOptions)
+
+	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
+	terraform.InitAndApply(t, terraformOptions)
 }
