@@ -49,6 +49,9 @@ func TestIntegrationSingleInstanceSingleRegion(t *testing.T) {
 	// Concatenate expected resource group name
 	//resourceGroupName := "Services-Test-UKS-" + uniqueID + "-rg"
 
+	// Define variables
+	locations := []string{"UK South"}
+
 	// Enable retryable error
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
@@ -59,7 +62,7 @@ func TestIntegrationSingleInstanceSingleRegion(t *testing.T) {
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
 			"resource_instance_count": 1,
-			"service_location": ["UK South"],
+			"service_location": locations,
 		},
 	})
 
@@ -83,6 +86,9 @@ func TestIntegrationMultiInstanceSingleRegion(t *testing.T) {
 	// Concatenate expected resource group name
 	//resourceGroupName := "Services-Test-UKS-" + uniqueID + "-rg"
 
+	// Define variables
+	locations := []string{"UK South"}
+
 	// Enable retryable error
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
@@ -93,7 +99,7 @@ func TestIntegrationMultiInstanceSingleRegion(t *testing.T) {
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
 			"resource_instance_count": 2,
-			"service_location": ["UK South"],
+			"service_location": locations,
 		},
 	})
 
@@ -127,7 +133,7 @@ func TestIntegrationMultiInstanceMultiRegion(t *testing.T) {
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
 			"resource_instance_count": 2,
-			"service_location": ["UK South","North Central US"],
+			"service_location": []string{"UK South", "North Central US"},
 		},
 	})
 
