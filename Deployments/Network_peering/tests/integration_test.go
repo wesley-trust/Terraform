@@ -28,10 +28,9 @@ func TestIntegrationExample(t *testing.T) {
 			"service_deployment": uniqueID,
 		},
 
-		// Variables to pass to the Terraform code using -var options
-		Targets: []string{
-			"module.windows_virtual_machine_spoke",
-			"module.linux_virtual_machine_spoke",
+		// Set Parallelism to 1
+		Parallelism: int{
+			1
 		},
 	})
 

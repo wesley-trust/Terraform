@@ -23,12 +23,6 @@ func TestUnitExample(t *testing.T) {
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
 		},
-
-		// Variables to pass to the Terraform code using -var options
-		Targets: []string{
-			"module.windows_virtual_machine_spoke",
-			//"module.linux_virtual_machine_spoke",
-		},
 	})
 
 	// Run `terraform init` and `terraform plan`. Fail the test if there are any errors.

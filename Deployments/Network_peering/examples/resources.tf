@@ -13,7 +13,7 @@ module "windows_virtual_machine_spoke" {
   resource_network_role   = "spoke"
 }
 
-/* module "linux_virtual_machine_hub" {
+module "linux_virtual_machine_hub" {
   for_each                = toset(local.resource_locations)
   source                  = "../../Linux_virtual_machine"
   service_environment     = var.service_environment
@@ -26,12 +26,9 @@ module "windows_virtual_machine_spoke" {
   resource_address_space  = lookup(var.resource_address_space, each.value, null)
   resource_dns_servers    = lookup(var.resource_dns_servers, each.value, null)
   resource_network_role   = "hub"
-} */
+}
 
 module "network_peering_spoke" {
-  depends_on = [
-    module.windows_virtual_machine_spoke
-  ]
   for_each                   = toset(local.resource_locations)
   source                     = "../"
   service_environment        = var.service_environment
@@ -42,7 +39,7 @@ module "network_peering_spoke" {
   resource_network_peer_role = "hub"
 }
 
-/* module "network_peering_hub" {
+module "network_peering_hub" {
   for_each                   = toset(local.resource_locations)
   source                     = "../"
   service_environment        = var.service_environment
@@ -51,4 +48,4 @@ module "network_peering_spoke" {
   service_location           = each.value
   resource_network_peer      = module.linux_virtual_machine_hub[each.value]
   resource_network_peer_role = "spoke"
-} */
+}
