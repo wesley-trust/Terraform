@@ -30,7 +30,7 @@ func TestIntegrationExample(t *testing.T) {
 
 		// Set Parallelism to 1
 		Parallelism: int{
-			1,
+			"1",
 		},
 	})
 
