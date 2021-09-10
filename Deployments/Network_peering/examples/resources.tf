@@ -28,16 +28,7 @@ module "linux_virtual_machine_hub" {
   resource_network_role   = "hub"
 }
 
-resource "time_sleep" "wait_300_seconds" {
-  #depends_on = [null_resource.previous]
-
-  create_duration = "300s"
-}
-
 module "network_peering_spoke" {
-  depends_on = [
-    time_sleep.wait_300_seconds
-  ]
   for_each                   = toset(local.resource_locations)
   source                     = "../"
   service_environment        = var.service_environment
@@ -49,9 +40,6 @@ module "network_peering_spoke" {
 }
 
 module "network_peering_hub" {
-  depends_on = [
-    time_sleep.wait_300_seconds
-  ]
   for_each                   = toset(local.resource_locations)
   source                     = "../"
   service_environment        = var.service_environment
