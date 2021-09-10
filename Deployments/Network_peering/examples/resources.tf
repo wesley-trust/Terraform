@@ -29,13 +29,13 @@ module "linux_virtual_machine_hub" {
 }
 
 module "network_peering_spoke" {
-  depends_on = [
-    module.windows_virtual_machine_spoke,
-    module.linux_virtual_machine_hub
-  ]
+  # Introduce intentional delay
+  provisioner "local-exec" {
+    command = "sleep 300"
+  }
   for_each                   = toset(local.resource_locations)
   source                     = "../"
-  service_environment        = terraform.workspace
+  service_environment        = var.service_environment
   service_deployment         = "${var.service_deployment}-Spoke"
   service_name               = var.service_name
   service_location           = each.value
@@ -44,13 +44,14 @@ module "network_peering_spoke" {
 }
 
 module "network_peering_hub" {
-    depends_on = [
-    module.windows_virtual_machine_spoke,
-    module.linux_virtual_machine_hub
-  ]
+  # Introduce intentional delay
+  provisioner "local-exec" {
+    command = "sleep 300"
+  }
+
   for_each                   = toset(local.resource_locations)
   source                     = "../"
-  service_environment        = terraform.workspace
+  service_environment        = var.service_environment
   service_deployment         = "${var.service_deployment}-Hub"
   service_name               = var.service_name
   service_location           = each.value
