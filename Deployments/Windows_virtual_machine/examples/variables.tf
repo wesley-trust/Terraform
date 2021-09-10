@@ -83,14 +83,17 @@ variable "resource_network_role" {
 variable "resource_data_disk_count" {
   description = "Desired size for the provisioned resources for each service"
   type        = number
+  default     = 0
 }
 
 variable "resource_network_interface_count" {
   description = "Desired number of network interfaces"
   type        = string
+  default     = 1
 }
 
 variable "provision_public_load_balancer" {
   description = "Whether to provision a public load balancer"
   type        = bool
+  default     = false
 }
