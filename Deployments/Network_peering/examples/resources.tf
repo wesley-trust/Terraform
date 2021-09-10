@@ -29,6 +29,10 @@ module "linux_virtual_machine_hub" {
 }
 
 module "network_peering_spoke" {
+  depends_on = [
+    module.windows_virtual_machine_spoke,
+    module.linux_virtual_machine_hub
+  ]
   for_each                   = toset(local.resource_locations)
   source                     = "../"
   service_environment        = terraform.workspace
@@ -40,6 +44,10 @@ module "network_peering_spoke" {
 }
 
 module "network_peering_hub" {
+    depends_on = [
+    module.windows_virtual_machine_spoke,
+    module.linux_virtual_machine_hub
+  ]
   for_each                   = toset(local.resource_locations)
   source                     = "../"
   service_environment        = terraform.workspace

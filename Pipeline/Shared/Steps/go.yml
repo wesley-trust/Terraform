@@ -5,7 +5,7 @@ steps:
   displayName: 'Run tests'
   inputs:
     command: 'test'
-    arguments: '${{ parameters.arguments }}'
+    arguments: '-timeout 1h ${{ parameters.arguments }}'
     workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
   env:
       ARM_TENANT_ID: $(TenantId)
