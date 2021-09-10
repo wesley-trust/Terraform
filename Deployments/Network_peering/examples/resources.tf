@@ -1,6 +1,6 @@
 module "windows_virtual_machine_spoke" {
   for_each                = toset(local.resource_locations)
-  source                  = "../../Windows_virtual_machine"
+  source                  = "../Windows_virtual_machine"
   service_environment     = var.service_environment
   service_deployment      = "${var.service_deployment}-Spoke"
   service_name            = var.service_name
@@ -15,7 +15,7 @@ module "windows_virtual_machine_spoke" {
 
 module "linux_virtual_machine_hub" {
   for_each                = toset(local.resource_locations)
-  source                  = "../../Linux_virtual_machine"
+  source                  = "../Linux_virtual_machine"
   service_environment     = var.service_environment
   service_deployment      = "${var.service_deployment}-Hub"
   service_name            = var.service_name
@@ -30,7 +30,7 @@ module "linux_virtual_machine_hub" {
 
 module "network_peering_spoke" {
   for_each                   = toset(local.resource_locations)
-  source                     = "../Modules/Deployments/Network_peering"
+  source                     = "../"
   service_environment        = terraform.workspace
   service_deployment         = "${var.service_deployment}-Spoke"
   service_name               = var.service_name
@@ -41,7 +41,7 @@ module "network_peering_spoke" {
 
 module "network_peering_hub" {
   for_each                   = toset(local.resource_locations)
-  source                     = "../Modules/Deployments/Network_peering"
+  source                     = "../"
   service_environment        = terraform.workspace
   service_deployment         = "${var.service_deployment}-Hub"
   service_name               = var.service_name
