@@ -13,13 +13,11 @@ variable "service_environment" {
 
 variable "service_location" {
   description = "The production resource locations to deploy"
-  type        = map(any)
-  default = {
-    Test = [
-      "UK South",
-      "North Central US"
-    ]
-  }
+  type        = list(string)
+  default = [
+    "UK South",
+    "North Central US"
+  ]
 }
 
 variable "service_deployment" {
@@ -37,12 +35,8 @@ variable "resource_name" {
 
 variable "resource_instance_count" {
   description = "Desired number of the provisioned resources for each service environment"
-  type        = map(any)
-  default = {
-    Test = {
-      "Services" = 2
-    }
-  }
+  type        = string
+  default     = 1
 }
 
 variable "resource_instance_size" {
