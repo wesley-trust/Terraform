@@ -13,6 +13,9 @@ func TestUnitSingleInstanceSingleRegion(t *testing.T) {
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
 
+	// Define variables
+	locations := []string{"UK South"}
+
 	// Enable retryable error
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
@@ -23,7 +26,7 @@ func TestUnitSingleInstanceSingleRegion(t *testing.T) {
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
 			"resource_instance_count": 1,
-			"service_location": ["UK South"],
+			"service_location": locations,
 		},
 	})
 
@@ -37,6 +40,9 @@ func TestUnitMultiInstanceSingleRegion(t *testing.T) {
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
 
+	// Define variables
+	locations := []string{"UK South"}
+
 	// Enable retryable error
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
@@ -47,7 +53,7 @@ func TestUnitMultiInstanceSingleRegion(t *testing.T) {
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
 			"resource_instance_count": 2,
-			"service_location": ["UK South"],
+			"service_location": locations,
 		},
 	})
 
@@ -61,6 +67,9 @@ func TestUnitMultiInstanceMultiRegion(t *testing.T) {
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
 
+	// Define variables
+	locations := []string{"UK South", "North Central US"}
+
 	// Enable retryable error
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
@@ -71,7 +80,7 @@ func TestUnitMultiInstanceMultiRegion(t *testing.T) {
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
 			"resource_instance_count": 2,
-			"service_location": ["UK South","North Central US"],
+			"service_location": locations,
 		},
 	})
 
