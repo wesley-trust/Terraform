@@ -30,7 +30,6 @@ func TestIntegrationExample(t *testing.T) {
 
 		// Set Parallelism to 1
 		Parallelism: "1",
-		},
 	})
 
 	// At the end of the test, run `terraform destroy` to clean up any resources that were created
