@@ -11,7 +11,7 @@ func TestIntegrationExample(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random ID to prevent a naming conflict
-	uniqueID := random.UniqueId()#
+	uniqueID := random.UniqueId()
 
 	// Deploy dependencies
 	// Enable retryable error
