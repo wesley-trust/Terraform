@@ -35,8 +35,8 @@ func TestLocalNetworkPeering(t *testing.T) {
 	terraform.InitAndPlan(t, terraformDependencyOptions)
 
 	// Define outputs
-	virtualMachineSpoke := terraform.OutputList(t, terraformDependencyOptions, "virtual_machine_spoke")
-	virtualMachineHub := terraform.OutputList(t, terraformDependencyOptions, "virtual_machine_hub")
+	virtualMachineSpoke := terraform.Output(t, terraformDependencyOptions, "virtual_machine_spoke")
+	virtualMachineHub := terraform.Output(t, terraformDependencyOptions, "virtual_machine_hub")
 
 	// Plan module
 	// Enable retryable error
