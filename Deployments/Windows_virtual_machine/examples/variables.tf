@@ -13,13 +13,11 @@ variable "service_environment" {
 
 variable "service_location" {
   description = "The production resource locations to deploy"
-  type        = map(any)
-  default = {
-    Test = [
-      "UK South",
-      "North Central US"
-    ]
-  }
+  type        = list(string)
+  default = [
+    "UK South",
+    "North Central US"
+  ]
 }
 
 variable "service_deployment" {
@@ -37,12 +35,8 @@ variable "resource_name" {
 
 variable "resource_instance_count" {
   description = "Desired number of the provisioned resources for each service environment"
-  type        = map(any)
-  default = {
-    Test = {
-      "Services" = 2
-    }
-  }
+  type        = string
+  default     = 1
 }
 
 variable "resource_instance_size" {
@@ -84,4 +78,22 @@ variable "resource_network_role" {
   description = "The network type for peering"
   type        = string
   default     = "spoke"
+}
+
+variable "resource_data_disk_count" {
+  description = "Desired size for the provisioned resources for each service"
+  type        = number
+  default     = 0
+}
+
+variable "resource_network_interface_count" {
+  description = "Desired number of network interfaces"
+  type        = string
+  default     = 1
+}
+
+variable "provision_public_load_balancer" {
+  description = "Whether to provision a public load balancer"
+  type        = bool
+  default     = false
 }
