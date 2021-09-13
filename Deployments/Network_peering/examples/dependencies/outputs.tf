@@ -1,7 +1,7 @@
-output "virtual_machine_spoke" {
-  value = module.virtual_machine_spoke
+output "service_network_spoke" {
+  value = module.service_network_spoke
 }
 
-output "virtual_machine_hub" {
-  value = module.virtual_machine_hub
+output "service_network_hub" {
+  value = module.service_network_hub
 }

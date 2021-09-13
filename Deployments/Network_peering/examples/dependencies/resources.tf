@@ -11,7 +11,7 @@ module "service_network_spoke" {
   for_each                = toset(var.service_location)
   source                  = "../../../../Resources/Network"
   service_name            = var.service_name
-  service_location_prefix = local.service_location_prefix
+  service_location_prefix = replace(each.value, "/[a-z[:space:]]/", "")
   resource_location       = module.resource_group_hub.location
   resource_group_name     = module.resource_group_hub.name
   resource_environment    = var.service_environment
@@ -33,7 +33,7 @@ module "service_network_hub" {
   for_each                = toset(var.service_location)
   source                  = "../../../../Resources/Network"
   service_name            = var.service_name
-  service_location_prefix = local.service_location_prefix
+  service_location_prefix = replace(each.value, "/[a-z[:space:]]/", "")
   resource_location       = module.resource_group_hub.location
   resource_group_name     = module.resource_group_hub.name
   resource_environment    = var.service_environment
