@@ -12,8 +12,8 @@ module "service_network_spoke" {
   source                  = "../../../../Resources/Network"
   service_name            = var.service_name
   service_location_prefix = replace(each.value, "/[a-z[:space:]]/", "")
-  resource_location       = module.resource_group_hub.location
-  resource_group_name     = module.resource_group_hub.name
+  resource_location       = module.resource_group_spoke[each.value].location
+  resource_group_name     = module.resource_group_spoke[each.value].name
   resource_environment    = var.service_environment
   resource_address_space  = lookup(var.resource_address_space, each.value, null)
   #resource_dns_servers    = lookup(var.resource_dns_servers, each.value, null)
@@ -34,8 +34,8 @@ module "service_network_hub" {
   source                  = "../../../../Resources/Network"
   service_name            = var.service_name
   service_location_prefix = replace(each.value, "/[a-z[:space:]]/", "")
-  resource_location       = module.resource_group_hub.location
-  resource_group_name     = module.resource_group_hub.name
+  resource_location       = module.resource_group_hub[each.value].location
+  resource_group_name     = module.resource_group_hub[each.value].name
   resource_environment    = var.service_environment
   resource_address_space  = lookup(var.resource_address_space, each.value, null)
   #resource_dns_servers    = lookup(var.resource_dns_servers, each.value, null)
