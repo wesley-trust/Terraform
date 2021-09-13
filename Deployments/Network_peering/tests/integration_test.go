@@ -14,7 +14,7 @@ func TestLocalNetworkPeering(t *testing.T) {
 	uniqueID := random.UniqueId()
 
 	// Define variables
-	locations := []string{"'UK South'"}
+	locations := []string{"UK South"}
 
 	// Deploy dependencies
 	// Enable retryable error
