@@ -22,12 +22,12 @@ variable "service_deployment" {
 }
 
 # Required resource variables
-variable "virtual_machine_spoke" {
+variable "service_network_spoke" {
   description = "Resource inputs for peering"
   type        = any
 }
 
-variable "virtual_machine_hub" {
+variable "service_network_hub" {
   description = "Resource inputs for peering"
   type        = any
 }

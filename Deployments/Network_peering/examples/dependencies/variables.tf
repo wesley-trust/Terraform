@@ -25,30 +25,6 @@ variable "service_deployment" {
   type        = string
 }
 
-variable "resource_name" {
-  description = "Desired name for the provisioned resources"
-  type        = map(string)
-  default = {
-    "Services" = "TST"
-  }
-}
-
-variable "resource_instance_count" {
-  description = "Desired number of the provisioned resources for each service environment"
-  type        = string
-  default     = 1
-}
-
-variable "resource_instance_size" {
-  description = "Desired size for the provisioned resources for each service"
-  type        = map(any)
-  default = {
-    Test = {
-      "Services" = "Standard_B1s"
-    }
-  }
-}
-
 variable "resource_address_space" {
   description = "Desired address space for the provisioned resources"
   type        = map(string)
@@ -72,28 +48,4 @@ variable "resource_dns_servers" {
       "10.6.2.5"
     ]
   }
-}
-
-variable "resource_network_role" {
-  description = "The network type for peering"
-  type        = string
-  default     = "spoke"
-}
-
-variable "resource_data_disk_count" {
-  description = "Desired size for the provisioned resources for each service"
-  type        = number
-  default     = 0
-}
-
-variable "resource_network_interface_count" {
-  description = "Desired number of network interfaces"
-  type        = string
-  default     = 1
-}
-
-variable "provision_public_load_balancer" {
-  description = "Whether to provision a public load balancer"
-  type        = bool
-  default     = false
 }
