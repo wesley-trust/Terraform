@@ -34,14 +34,14 @@ func TestSingleInstanceSingleRegion(t *testing.T) {
 	terraform.InitAndPlan(t, terraformOptions)
 }
 
-func TestMultiInstanceMultiRegion(t *testing.T) {
+func TestSingleInstanceSingleRegionWithDataDisks(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
 
 	// Define variables
-	locations := []string{"UK South", "North Central US"}
+	locations := []string{"UK South"}
 
 	// Enable retryable error
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
@@ -52,8 +52,36 @@ func TestMultiInstanceMultiRegion(t *testing.T) {
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
-			"resource_instance_count": 2,
+			"resource_instance_count": 1,
 			"service_location": locations,
+			"resource_data_disk_count": 2,
+		},
+	})
+
+	// Run `terraform init` and `terraform plan`. Fail the test if there are any errors.
+	terraform.InitAndPlan(t, terraformOptions)
+}
+func TestSingleInstanceSingleRegionWithMultiNI(t *testing.T) {
+	t.Parallel()
+
+	// Generate a random ID to prevent a naming conflict
+	uniqueID := random.UniqueId()
+
+	// Define variables
+	locations := []string{"UK South"}
+
+	// Enable retryable error
+	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+
+		// The path to where the Terraform code is located
+		TerraformDir: "../examples/",
+
+		// Variables to pass to the Terraform code using -var options
+		Vars: map[string]interface{}{
+			"service_deployment": uniqueID,
+			"resource_instance_count": 1,
+			"service_location": locations,
+			"resource_network_interface_count": 2,
 		},
 	})
 
@@ -61,14 +89,14 @@ func TestMultiInstanceMultiRegion(t *testing.T) {
 	terraform.InitAndPlan(t, terraformOptions)
 }
 
-func TestMultiInstanceMultiRegionWithLB(t *testing.T) {
+func TestMultiInstanceSingleRegionWithLB(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
 
 	// Define variables
-	locations := []string{"UK South", "North Central US"}
+	locations := []string{"UK South"}
 
 	// Enable retryable error
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
@@ -89,7 +117,7 @@ func TestMultiInstanceMultiRegionWithLB(t *testing.T) {
 	terraform.InitAndPlan(t, terraformOptions)
 }
 
-func TestMultiInstanceMultiRegionWithDataDisks(t *testing.T) {
+func TestMultiInstanceMultiRegion(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random ID to prevent a naming conflict
@@ -109,35 +137,6 @@ func TestMultiInstanceMultiRegionWithDataDisks(t *testing.T) {
 			"service_deployment": uniqueID,
 			"resource_instance_count": 2,
 			"service_location": locations,
-			"resource_data_disk_count": 2,
-		},
-	})
-
-	// Run `terraform init` and `terraform plan`. Fail the test if there are any errors.
-	terraform.InitAndPlan(t, terraformOptions)
-}
-
-func TestMultiInstanceMultiRegionWithMultiNI(t *testing.T) {
-	t.Parallel()
-
-	// Generate a random ID to prevent a naming conflict
-	uniqueID := random.UniqueId()
-
-	// Define variables
-	locations := []string{"UK South", "North Central US"}
-
-	// Enable retryable error
-	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-
-		// The path to where the Terraform code is located
-		TerraformDir: "../examples/",
-
-		// Variables to pass to the Terraform code using -var options
-		Vars: map[string]interface{}{
-			"service_deployment": uniqueID,
-			"resource_instance_count": 2,
-			"service_location": locations,
-			"resource_network_interface_count": 2,
 		},
 	})
 
