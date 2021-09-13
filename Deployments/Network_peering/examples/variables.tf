@@ -1,4 +1,4 @@
-# Define variables
+# Required service variables
 variable "service_name" {
   description = "Desired name for the provisioned resources"
   type        = string
@@ -13,13 +13,7 @@ variable "service_environment" {
 
 variable "service_location" {
   description = "The production resource locations to deploy"
-  type        = map(any)
-  default = {
-    Test = [
-      "UK South",
-      "North Central US"
-    ]
-  }
+  type        = list(string)
 }
 
 variable "service_deployment" {
@@ -27,55 +21,13 @@ variable "service_deployment" {
   type        = string
 }
 
-variable "resource_name" {
-  description = "Desired name for the provisioned resources"
-  type        = map(string)
-  default = {
-    "Services" = "TST"
-  }
+# Required resource variables
+variable "resource_network_peer_spoke" {
+  description = "Resource outputs for peering"
+  type        = any
 }
 
-variable "resource_instance_count" {
-  description = "Desired number of the provisioned resources for each service environment"
-  type        = map(any)
-  default = {
-    Test = {
-      "Services" = 2
-    }
-  }
-}
-
-variable "resource_instance_size" {
-  description = "Desired size for the provisioned resources for each service"
-  type        = map(any)
-  default = {
-    Test = {
-      "Services" = "Standard_B1s"
-    }
-  }
-}
-
-variable "resource_address_space" {
-  description = "Desired address space for the provisioned resources"
-  type        = map(string)
-  default = {
-    "UK South"         = "10.0.2.0/24"
-    "North Central US" = "10.6.2.0/24"
-  }
-}
-
-variable "resource_dns_servers" {
-  description = "Desired DNS servers for the provisioned resources"
-  type        = map(any)
-  default = {
-    "UK South" = [
-      "10.0.2.4",
-      "10.0.2.5"
-    ]
-
-    "North Central US" = [
-      "10.6.2.4",
-      "10.6.2.5"
-    ]
-  }
+variable "resource_network_peer_hub" {
+  description = "Resource outputs for peering"
+  type        = any
 }

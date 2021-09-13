@@ -7,11 +7,14 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestIntegrationExample(t *testing.T) {
+func TestLocalNetworkPeering(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
+
+	// Define variables
+	locations := []string{"UK South"}
 
 	// Deploy dependencies
 	// Enable retryable error
@@ -23,14 +26,20 @@ func TestIntegrationExample(t *testing.T) {
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
+			"resource_instance_count": 1,
+			"service_location": locations,
 		},
 	})
 
 	// At the end of the test, run `terraform destroy` to clean up any resources that were created
-	defer terraform.Destroy(t, terraformDependencyOptions)
+	//defer terraform.Destroy(t, terraformDependencyOptions)
 
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformDependencyOptions)
+
+	// Define outputs
+	virtualMachineSpoke := terraform.Output(t, terraformDependencyOptions, "virtual_machine_spoke")
+	virtualMachineHub := terraform.Output(t, terraformDependencyOptions, "virtual_machine_hub")
 
 	// Deploy module
 	// Enable retryable error
@@ -42,6 +51,10 @@ func TestIntegrationExample(t *testing.T) {
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
+			"resource_instance_count": 1,
+			"service_location": locations,
+			"resource_network_peer_spoke": virtualMachineSpoke,
+			"resource_network_peer_hub": virtualMachineHub,
 		},
 	})
 

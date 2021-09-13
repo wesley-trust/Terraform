@@ -1,6 +1,6 @@
-module "windows_virtual_machine_spoke" {
+module "virtual_machine_spoke" {
   for_each                = toset(local.resource_locations)
-  source                  = "../../Windows_virtual_machine"
+  source                  = "../../../Windows_virtual_machine"
   service_environment     = var.service_environment
   service_deployment      = "${var.service_deployment}-Spoke"
   service_name            = var.service_name
@@ -13,9 +13,9 @@ module "windows_virtual_machine_spoke" {
   resource_network_role   = "spoke"
 }
 
-module "linux_virtual_machine_hub" {
+module "virtual_machine_hub" {
   for_each                = toset(local.resource_locations)
-  source                  = "../../Linux_virtual_machine"
+  source                  = "../../../Linux_virtual_machine"
   service_environment     = var.service_environment
   service_deployment      = "${var.service_deployment}-Hub"
   service_name            = var.service_name
