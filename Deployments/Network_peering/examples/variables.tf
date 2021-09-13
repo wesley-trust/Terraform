@@ -29,5 +29,5 @@ variable "service_network_spoke" {
 
 variable "service_network_hub" {
   description = "Resource inputs for peering"
-  type        = map(list(string))
+  type        = map(map(string))
 }
