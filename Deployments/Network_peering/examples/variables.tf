@@ -24,7 +24,7 @@ variable "service_deployment" {
 # Required resource variables
 variable "service_network_spoke" {
   description = "Resource inputs for peering"
-  type        = map(list(string))
+  type        = map(map(string))
 }
 
 variable "service_network_hub" {
