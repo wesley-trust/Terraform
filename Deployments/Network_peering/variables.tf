@@ -22,7 +22,7 @@ variable "service_location" {
 # Required resource variables
 variable "resource_network_peer" {
   description = "Resource outputs for peering"
-  type        = map(any)
+  type        = map(string)
 }
 
 variable "resource_network_peer_role" {
