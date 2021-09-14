@@ -1,5 +1,6 @@
 module "network_peering_spoke" {
-  for_each                   = toset(var.service_location)
+  #for_each                   = toset(var.service_location)
+  for_each                   = var.service_location
   source                     = "../"
   service_environment        = var.service_environment
   service_deployment         = "${var.service_deployment}-Spoke"
@@ -14,7 +15,8 @@ module "network_peering_spoke" {
 }
 
 module "network_peering_hub" {
-  for_each                   = toset(var.service_location)
+  #for_each                   = toset(var.service_location)
+  for_each                   = var.service_location
   source                     = "../"
   service_environment        = var.service_environment
   service_deployment         = "${var.service_deployment}-Hub"
