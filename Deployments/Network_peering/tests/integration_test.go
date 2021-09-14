@@ -37,8 +37,8 @@ func TestLocalNetworkPeering(t *testing.T) {
 	terraform.InitAndApply(t, terraformDependencyOptions)
 
 	// Define outputs
-	serviceNetworkSpoke := terraform.OutputMapOfObjects(t, terraformDependencyOptions, "service_network_spoke", interface {})
-	serviceNetworkHub := terraform.OutputMapOfObjects(t, terraformDependencyOptions, "service_network_hub", interface {})
+	serviceNetworkSpoke := terraform.OutputStruct(t, terraformDependencyOptions, "service_network_spoke", interface {})
+	serviceNetworkHub := terraform.OutputStruct(t, terraformDependencyOptions, "service_network_hub", interface {})
 
 	// Deploy module
 	// Enable retryable error
