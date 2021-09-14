@@ -24,10 +24,26 @@ variable "service_deployment" {
 # Required resource variables
 variable "service_network_spoke" {
   description = "Resource inputs for peering"
-  type = map(any)
+  type = object(
+    {
+      subnet_id               = string,
+      subnet_address_prefixes = list(string),
+      network_id              = string,
+      network_name            = string,
+      resource_group_name     = string,
+    }
+  )
 }
 
 variable "service_network_hub" {
   description = "Resource inputs for peering"
-  type = map(any)
+  type = object(
+    {
+      subnet_id               = string,
+      subnet_address_prefixes = list(string),
+      network_id              = string,
+      network_name            = string,
+      resource_group_name     = string,
+    }
+  )
 }
