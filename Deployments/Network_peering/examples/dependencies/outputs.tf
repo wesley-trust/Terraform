@@ -1,14 +1,14 @@
 output "service_network_spoke" {
   value = {
-    "network_name"        = module.service_network_spoke.network_name
-    "resource_group_name" = module.resource_group_spoke.name
+    "network_name"        = module.service_network_spoke.*.network_name
+    "resource_group_name" = module.resource_group_spoke.*.name
   }
 }
 
 output "service_network_hub" {
   value = {
-    "network_name"        = module.service_network_hub.network_name
-    "resource_group_name" = module.resource_group_hub.name
+    "network_name"        = module.service_network_hub.*.network_name
+    "resource_group_name" = module.resource_group_hub.*.name
   }
 }
 
