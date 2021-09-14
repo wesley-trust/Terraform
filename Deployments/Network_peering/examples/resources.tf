@@ -1,5 +1,5 @@
 module "network_peering_spoke" {
-  count                      = length(var.service_location)
+  count                      = length(toset(var.service_location))
   source                     = "../"
   service_environment        = var.service_environment
   resource_network_peer      = element(var.service_network_spoke, count.index)
@@ -7,7 +7,7 @@ module "network_peering_spoke" {
 }
 
 module "network_peering_hub" {
-  count                      = length(var.service_location)
+  count                      = length(toset(var.service_location))
   source                     = "../"
   service_environment        = var.service_environment
   resource_network_peer      = element(var.service_network_hub, count.index)
