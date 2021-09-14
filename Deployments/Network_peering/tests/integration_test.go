@@ -26,7 +26,7 @@ func TestLocalNetworkPeering(t *testing.T) {
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
 			"service_deployment": uniqueID,
-			"service_location": locations,
+			"service_location":   locations,
 		},
 	})
 
@@ -37,8 +37,8 @@ func TestLocalNetworkPeering(t *testing.T) {
 	terraform.InitAndApply(t, terraformDependencyOptions)
 
 	// Define outputs
-	serviceNetworkSpoke := terraform.OutputStruct(t, terraformDependencyOptions, "service_network_spoke")
-	serviceNetworkHub := terraform.OutputStruct(t, terraformDependencyOptions, "service_network_hub")
+	serviceNetworkSpoke := terraform.OutputListOfObjects(t, terraformDependencyOptions, "service_network_spoke")
+	serviceNetworkHub := terraform.OutputListOfObjects(t, terraformDependencyOptions, "service_network_hub")
 
 	// Deploy module
 	// Enable retryable error
@@ -49,10 +49,10 @@ func TestLocalNetworkPeering(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment": uniqueID,
-			"service_location": locations,
+			"service_deployment":    uniqueID,
+			"service_location":      locations,
 			"service_network_spoke": serviceNetworkSpoke,
-			"service_network_hub": serviceNetworkHub,
+			"service_network_hub":   serviceNetworkHub,
 		},
 	})
 
