@@ -2,7 +2,7 @@ package test
 
 import (
 	"testing"
-	
+
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
@@ -24,9 +24,9 @@ func TestSingleInstanceSingleRegion(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment": uniqueID,
+			"service_deployment":      uniqueID,
 			"resource_instance_count": 1,
-			"service_location": locations,
+			"service_location":        locations,
 		},
 	})
 
@@ -51,9 +51,9 @@ func TestSingleInstanceSingleRegionWithDataDisks(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment": uniqueID,
-			"resource_instance_count": 1,
-			"service_location": locations,
+			"service_deployment":       uniqueID,
+			"resource_instance_count":  1,
+			"service_location":         locations,
 			"resource_data_disk_count": 2,
 		},
 	})
@@ -78,9 +78,9 @@ func TestSingleInstanceSingleRegionWithMultiNI(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment": uniqueID,
-			"resource_instance_count": 1,
-			"service_location": locations,
+			"service_deployment":               uniqueID,
+			"resource_instance_count":          1,
+			"service_location":                 locations,
 			"resource_network_interface_count": 2,
 		},
 	})
@@ -106,9 +106,9 @@ func TestMultiInstanceSingleRegionWithLB(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment": uniqueID,
-			"resource_instance_count": 2,
-			"service_location": locations,
+			"service_deployment":             uniqueID,
+			"resource_instance_count":        2,
+			"service_location":               locations,
 			"provision_public_load_balancer": true,
 		},
 	})
@@ -134,9 +134,9 @@ func TestMultiInstanceMultiRegion(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment": uniqueID,
+			"service_deployment":      uniqueID,
 			"resource_instance_count": 2,
-			"service_location": locations,
+			"service_location":        locations,
 		},
 	})
 
