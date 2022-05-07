@@ -20,7 +20,7 @@ variable "resource_location" {
 }
 
 variable "resource_instance_count" {
-  description = "Virtual network ID for the provisioned resources"
+  description = "Number of resource instances"
   type        = string
 }
 
