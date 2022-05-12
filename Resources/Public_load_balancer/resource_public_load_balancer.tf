@@ -5,7 +5,7 @@ resource "azurerm_public_ip" "public_ip" {
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
   sku                 = "Standard"
-  zones               = var.resource_location_zone_support == true ? ["1", "2", "3"] : null
+  availability_zone   = var.resource_location_zone_support == true ? "Zone-Redundant" : "No-Zone"
   domain_name_label   = local.resource_public_ip_domain_name_label
 }
 
