@@ -10,10 +10,16 @@ stages:
     continueOnError: false
     steps:
 
-    # Bootstrap steps
-    - template: ../Steps/bootstrap.yml
+    # Terraform install step
+    - template: ../Steps/terraform_install.yml
+
+    # Terraform steps
+    - template: ../Steps/terraform.yml
+
+    # Regula steps
+    - template: ../Steps/regula.yml
     
-    # Test specific step
+    # Go Steps
     - template: ../Steps/go.yml
       parameters:
         arguments: '-v unit_test.go'

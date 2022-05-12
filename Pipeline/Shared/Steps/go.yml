@@ -1,5 +1,29 @@
 steps:
    
+# Install Go
+- task: GoTool@0
+  displayName: 'Go Install'
+  inputs:
+    version: '1.17'
+
+# Create test module
+- task: Go@0
+  displayName: 'Create test module'  
+  inputs:
+    command: 'custom'
+    customCommand: 'mod'
+    arguments: 'init $(Module)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
+
+# Add module dependencies
+- task: Go@0
+  displayName: 'Get test dependencies'
+  inputs:
+    command: 'custom'
+    customCommand: 'mod'
+    arguments: 'tidy'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
+
 # Run Go Test
 - task: Go@0
   displayName: 'Run tests'

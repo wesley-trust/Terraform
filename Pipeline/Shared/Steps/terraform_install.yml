@@ -1,0 +1,7 @@
+steps:
+
+# Install Terraform
+- task: TerraformInstaller@0
+  displayName: 'Terraform Install'
+  inputs:
+    terraformVersion: 'latest'
