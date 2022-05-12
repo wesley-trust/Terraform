@@ -4,7 +4,7 @@ steps:
 - task: GoTool@0
   displayName: 'Go Install'
   inputs:
-    version: 'latest'
+    version: '1.18'
 
 # Create test module
 - task: Go@0
