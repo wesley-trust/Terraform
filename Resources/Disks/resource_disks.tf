@@ -7,7 +7,7 @@ resource "azurerm_managed_disk" "disks" {
   storage_account_type = "Standard_LRS"
   create_option        = "Empty"
   disk_size_gb         = var.resource_data_disk_size
-  zones                = var.resource_zone != null ? [var.resource_zone] : null
+  zone                 = var.resource_zone != null ? var.resource_zone : null
 
   tags = {
     environment = var.resource_environment
