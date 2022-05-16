@@ -1,5 +1,9 @@
 # Create spoke network dependencies
 module "data_disks" {
+  depends_on = [
+    module.resource_group,
+    azurerm_windows_virtual_machine.virtual_machine
+  ]
   count                       = var.resource_instance_count
   source                      = "../../Resources/Disks"
   resource_location           = module.resource_group.location
