@@ -105,7 +105,7 @@ func TestSingleInstanceSingleRegion_MultiNI(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 }
 
-/* func TestMultiInstanceSingleRegion_LB(t *testing.T) {
+func TestMultiInstanceSingleRegion_LB(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random deployment name for the test to prevent a naming conflict
@@ -168,4 +168,4 @@ func TestMultiInstanceMultiRegion(t *testing.T) {
 
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
-} */
+}
