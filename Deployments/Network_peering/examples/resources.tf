@@ -1,10 +1,15 @@
-module "network_peering" {
-  for_each            = toset(local.resource_locations)
-  source              = "../"
-  service_environment = var.service_environment
-  service_deployment  = random_id.id
-  service_name        = var.service_name
-  service_location    = each.value
-  #resource_network_peer      = module.virtual_machines[each.value]
-  resource_network_peer_role = var.resource_network_peer_role
+module "network_peering_spoke" {
+  count                      = length(var.service_location)
+  source                     = "../"
+  service_environment        = var.service_environment
+  resource_network_peer      = toset(var.service_network_spoke)[count.index]
+  resource_network_peer_role = "hub"
+}
+
+module "network_peering_hub" {
+  count                      = length(toset(var.service_location))
+  source                     = "../"
+  service_environment        = var.service_environment
+  resource_network_peer      = toset(var.service_network_hub)[count.index]
+  resource_network_peer_role = "spoke"
 }

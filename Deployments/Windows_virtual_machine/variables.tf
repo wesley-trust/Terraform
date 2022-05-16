@@ -84,7 +84,7 @@ variable "resource_data_disk_count" {
 variable "resource_data_disk_size" {
   description = "Desired disk size for the provisioned data disk resources"
   type        = number
-  default     = 0
+  default     = 32
 }
 
 variable "resource_disk_size" {

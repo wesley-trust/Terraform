@@ -1,11 +1,35 @@
 steps:
    
+# Install Go
+- task: GoTool@0
+  displayName: 'Go Install'
+  inputs:
+    version: '1.18'
+
+# Create test module
+- task: Go@0
+  displayName: 'Create test module'  
+  inputs:
+    command: 'custom'
+    customCommand: 'mod'
+    arguments: 'init $(Module)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
+
+# Add module dependencies
+- task: Go@0
+  displayName: 'Get test dependencies'
+  inputs:
+    command: 'custom'
+    customCommand: 'mod'
+    arguments: 'tidy'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
+
 # Run Go Test
 - task: Go@0
   displayName: 'Run tests'
   inputs:
     command: 'test'
-    arguments: '${{ parameters.arguments }}'
+    arguments: '-timeout 1h ${{ parameters.arguments }}'
     workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/tests'
   env:
       ARM_TENANT_ID: $(TenantId)

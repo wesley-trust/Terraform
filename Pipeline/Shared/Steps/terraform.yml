@@ -1,0 +1,23 @@
+steps:
+
+# Initialise Terraform
+- task: TerraformCLI@0
+  displayName: 'Terraform Initialise'
+  inputs:
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/'
+    backendType: 'azurerm'
+    backendServiceArm: '$(backendServiceArm)'
+    ensureBackend: true
+    backendAzureRmResourceGroupName: '$(backendAzureRmResourceGroupName)'
+    backendAzureRmResourceGroupLocation: '$(backendAzureRmResourceGroupLocation)'
+    backendAzureRmStorageAccountName: '$(backendAzureRmStorageAccountName)'
+    backendAzureRmContainerName: '$(backendAzureRmContainerName)'
+    backendAzureRmKey: '$(backendAzureRmKey)'
+  
+# Validate Terraform
+- task: TerraformCLI@0
+  displayName: 'Terraform Validate'
+  inputs:
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Deployments/$(Module)/'
