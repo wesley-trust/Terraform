@@ -10,9 +10,10 @@ import (
 func TestSingleInstanceSingleRegion(t *testing.T) {
 	t.Parallel()
 
-	// Generate a random ID to prevent a naming conflict
+	// Generate a random deployment name for the test to prevent a naming conflict
 	uniqueID := random.UniqueId()
-	testID := "SingleInstanceSingleRegion"
+	testREF := "SingleInstanceSingleRegion"
+	serviceDeployment := testREF + "-" + uniqueID
 
 	// Define variables
 	locations := []string{"UK South"}
@@ -25,7 +26,7 @@ func TestSingleInstanceSingleRegion(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment": testID + uniqueID,
+			"service_deployment": testREF + "-" + uniqueID,
 			"resource_instance_count": 1,
 			"service_location": locations,
 		},
