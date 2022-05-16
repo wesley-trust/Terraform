@@ -23,6 +23,9 @@ resource "azurerm_subnet" "subnet" {
 }
 
 resource "azurerm_route_table" "route_table" {
+  depends_on = [
+    azurerm_subnet.subnet
+  ]
   count                         = var.resource_network_subnet_count
   name                          = "${local.resource_route_table_name}${count.index + 1}"
   location                      = var.resource_location
@@ -46,6 +49,9 @@ resource "azurerm_subnet_route_table_association" "subnet_association" {
 }
 
 resource "azurerm_network_security_group" "network_security_group" {
+  depends_on = [
+    azurerm_subnet.subnet
+  ]
   count               = var.resource_network_subnet_count
   name                = "${local.resource_network_security_group_name}${count.index + 1}"
   location            = var.resource_location
