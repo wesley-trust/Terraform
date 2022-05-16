@@ -36,7 +36,7 @@ func TestSingleInstanceSingleRegion(t *testing.T) {
 	terraform.InitAndPlan(t, terraformOptions)
 }
 
-func TestSingleInstanceSingleRegion_DataDisks(t *testing.T) {
+/* func TestSingleInstanceSingleRegion_DataDisks(t *testing.T) {
 	t.Parallel()
 
 	// Generate a random deployment name for the test to prevent a naming conflict
@@ -153,4 +153,4 @@ func TestMultiInstanceMultiRegion(t *testing.T) {
 
 	// Run `terraform init` and `terraform plan`. Fail the test if there are any errors.
 	terraform.InitAndPlan(t, terraformOptions)
-}
+} */
