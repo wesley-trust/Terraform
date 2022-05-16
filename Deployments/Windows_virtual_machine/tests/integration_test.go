@@ -12,6 +12,7 @@ func TestSingleInstanceSingleRegion(t *testing.T) {
 
 	// Generate a random ID to prevent a naming conflict
 	uniqueID := random.UniqueId()
+	testID := "SingleInstanceSingleRegion"
 
 	// Define variables
 	locations := []string{"UK South"}
@@ -24,7 +25,7 @@ func TestSingleInstanceSingleRegion(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment": uniqueID,
+			"service_deployment": testID + uniqueID,
 			"resource_instance_count": 1,
 			"service_location": locations,
 		},
@@ -36,7 +37,7 @@ func TestSingleInstanceSingleRegion(t *testing.T) {
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
 }
-
+/* 
 func TestSingleInstanceSingleRegionWithDataDisks(t *testing.T) {
 	t.Parallel()
 
@@ -158,4 +159,4 @@ func TestMultiInstanceMultiRegion(t *testing.T) {
 
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
-}
+} */
