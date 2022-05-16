@@ -43,6 +43,9 @@ resource "azurerm_route" "udr_internet" {
 }
 
 resource "azurerm_subnet_route_table_association" "subnet_association" {
+  depends_on = [
+    azurerm_virtual_network.virtual_network
+  ]
   count          = var.resource_network_subnet_count
   subnet_id      = azurerm_subnet.subnet[count.index].id
   route_table_id = azurerm_route_table.route_table[count.index].id
@@ -59,6 +62,9 @@ resource "azurerm_network_security_group" "network_security_group" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "network_security_group_association" {
+  depends_on = [
+    azurerm_virtual_network.virtual_network
+  ]
   count                     = var.resource_network_subnet_count
   subnet_id                 = azurerm_subnet.subnet[count.index].id
   network_security_group_id = azurerm_network_security_group.network_security_group[count.index].id
