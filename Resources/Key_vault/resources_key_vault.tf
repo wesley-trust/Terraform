@@ -50,6 +50,9 @@ resource "azurerm_key_vault" "vault" {
 
 # Create Key Vault Secret
 resource "azurerm_key_vault_secret" "secret" {
+  depends_on = [
+    azurerm_key_vault.vault
+  ]
   count = var.resource_instance_count
 
   name         = "${var.resource_name}${format("%02d", count.index + 1)}-vm"
