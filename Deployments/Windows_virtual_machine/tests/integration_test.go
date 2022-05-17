@@ -9,16 +9,16 @@ import (
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 )
 
-func TestSingleInstanceSingleRegion(t *testing.T) {
+func TestApplySingleInstanceSingleRegion(t *testing.T) {
 	t.Parallel()
 
-	// Root folder where terraform files should be (relative to the test folder)
-	rootFolder := "../"
+	// Root folder where Terraform files should be (relative to the test folder)
+	rootFolder := "../../../"
 
-	// Relative path to terraform module being tested from the root folder
-	terraformFolderRelativeToRoot := "./examples"
+	// Path to Terraform example files being tested (relative to the root folder)
+	terraformFolderRelativeToRoot := "./Deployments/Windows_virtual_machine/examples/"
 
-	// Copy the terraform folder to a temp folder
+	// Copy the terraform folder to a temp folder to prevent conflicts from parallel runs
 	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, rootFolder, terraformFolderRelativeToRoot)
 
 	// Generate a random deployment name for the test to prevent a naming conflict
@@ -49,9 +49,18 @@ func TestSingleInstanceSingleRegion(t *testing.T) {
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
 }
-/* 
-func TestSingleInstanceSingleRegion_DataDisks(t *testing.T) {
+
+func TestApplySingleInstanceSingleRegion_DataDisks(t *testing.T) {
 	t.Parallel()
+
+	// Root folder where Terraform files should be (relative to the test folder)
+	rootFolder := "../../../"
+
+	// Path to Terraform example files being tested (relative to the root folder)
+	terraformFolderRelativeToRoot := "./Deployments/Windows_virtual_machine/examples/"
+
+	// Copy the terraform folder to a temp folder to prevent conflicts from parallel runs
+	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, rootFolder, terraformFolderRelativeToRoot)
 
 	// Generate a random deployment name for the test to prevent a naming conflict
 	uniqueID := random.UniqueId()
@@ -65,7 +74,7 @@ func TestSingleInstanceSingleRegion_DataDisks(t *testing.T) {
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
 		// The path to where the Terraform code is located
-		TerraformDir: "../examples/",
+		TerraformDir: tempTestFolder,
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
@@ -83,8 +92,17 @@ func TestSingleInstanceSingleRegion_DataDisks(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 }
 
-func TestSingleInstanceSingleRegion_MultiNI(t *testing.T) {
+func TestApplySingleInstanceSingleRegion_MultiNI(t *testing.T) {
 	t.Parallel()
+
+	// Root folder where Terraform files should be (relative to the test folder)
+	rootFolder := "../../../"
+
+	// Path to Terraform example files being tested (relative to the root folder)
+	terraformFolderRelativeToRoot := "./Deployments/Windows_virtual_machine/examples/"
+
+	// Copy the terraform folder to a temp folder to prevent conflicts from parallel runs
+	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, rootFolder, terraformFolderRelativeToRoot)
 
 	// Generate a random deployment name for the test to prevent a naming conflict
 	uniqueID := random.UniqueId()
@@ -98,7 +116,7 @@ func TestSingleInstanceSingleRegion_MultiNI(t *testing.T) {
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
 		// The path to where the Terraform code is located
-		TerraformDir: "../examples/",
+		TerraformDir: tempTestFolder,
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
@@ -116,8 +134,17 @@ func TestSingleInstanceSingleRegion_MultiNI(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 }
 
-func TestMultiInstanceSingleRegion_LB(t *testing.T) {
+func TestApplyMultiInstanceSingleRegion_LB(t *testing.T) {
 	t.Parallel()
+
+	// Root folder where Terraform files should be (relative to the test folder)
+	rootFolder := "../../../"
+
+	// Path to Terraform example files being tested (relative to the root folder)
+	terraformFolderRelativeToRoot := "./Deployments/Windows_virtual_machine/examples/"
+
+	// Copy the terraform folder to a temp folder to prevent conflicts from parallel runs
+	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, rootFolder, terraformFolderRelativeToRoot)
 
 	// Generate a random deployment name for the test to prevent a naming conflict
 	uniqueID := random.UniqueId()
@@ -131,7 +158,7 @@ func TestMultiInstanceSingleRegion_LB(t *testing.T) {
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
 		// The path to where the Terraform code is located
-		TerraformDir: "../examples/",
+		TerraformDir: tempTestFolder,
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
@@ -149,8 +176,17 @@ func TestMultiInstanceSingleRegion_LB(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 }
 
-func TestMultiInstanceMultiRegion(t *testing.T) {
+func TestApplyMultiInstanceMultiRegion(t *testing.T) {
 	t.Parallel()
+
+	// Root folder where Terraform files should be (relative to the test folder)
+	rootFolder := "../../../"
+
+	// Path to Terraform example files being tested (relative to the root folder)
+	terraformFolderRelativeToRoot := "./Deployments/Windows_virtual_machine/examples/"
+
+	// Copy the terraform folder to a temp folder to prevent conflicts from parallel runs
+	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, rootFolder, terraformFolderRelativeToRoot)
 
 	// Generate a random deployment name for the test to prevent a naming conflict
 	uniqueID := random.UniqueId()
@@ -164,7 +200,7 @@ func TestMultiInstanceMultiRegion(t *testing.T) {
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
 		// The path to where the Terraform code is located
-		TerraformDir: "../examples/",
+		TerraformDir: tempTestFolder,
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
@@ -180,4 +216,3 @@ func TestMultiInstanceMultiRegion(t *testing.T) {
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
 }
- */
