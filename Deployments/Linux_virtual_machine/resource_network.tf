@@ -1,6 +1,6 @@
 # Create spoke network dependencies
 module "service_network" {
-  source                        = "../../Resources/Network"
+  source                        = "github.com/wesley-trust/tfsubmodule-network"
   service_name                  = var.service_name
   service_location_prefix       = local.service_location_prefix
   resource_location             = module.resource_group.location

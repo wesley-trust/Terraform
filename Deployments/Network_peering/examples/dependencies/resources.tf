@@ -9,7 +9,7 @@ module "resource_group_spoke" {
 
 module "service_network_spoke" {
   for_each                = toset(var.service_location)
-  source                  = "../../../../Resources/Network"
+  source                  = "github.com/wesley-trust/tfsubmodule-network"
   service_name            = var.service_name
   service_location_prefix = replace(each.value, "/[a-z[:space:]]/", "")
   resource_location       = module.resource_group_spoke[each.value].location
@@ -30,7 +30,7 @@ module "resource_group_hub" {
 
 module "service_network_hub" {
   for_each                = toset(var.service_location)
-  source                  = "../../../../Resources/Network"
+  source                  = "github.com/wesley-trust/tfsubmodule-network"
   service_name            = var.service_name
   service_location_prefix = replace(each.value, "/[a-z[:space:]]/", "")
   resource_location       = module.resource_group_hub[each.value].location
