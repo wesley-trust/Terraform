@@ -17,6 +17,9 @@ resource "azurerm_availability_set" "availability_set" {
 
 # Create virtual machine
 resource "azurerm_windows_virtual_machine" "virtual_machine" {
+  depends_on = [
+    module.network_interfaces
+  ]
   count = var.resource_instance_count
 
   # Format with leading zero
