@@ -9,6 +9,11 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "resource_deployment" {
+  description = "Desired deployment identifier for the resource"
+  type        = string
+}
+
 variable "resource_environment" {
   description = "Desired environment for the provisioned resources"
   type        = string
