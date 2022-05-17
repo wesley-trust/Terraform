@@ -1,6 +1,6 @@
 module "resource_group_spoke" {
   for_each            = toset(var.service_location)
-  source              = "../../../Resource_group"
+  source              = "github.com/wesley-trust/tfmodule-resource_group"
   service_environment = var.service_environment
   service_name        = var.service_name
   service_location    = each.value
@@ -21,7 +21,7 @@ module "service_network_spoke" {
 
 module "resource_group_hub" {
   for_each            = toset(var.service_location)
-  source              = "../../../Resource_group"
+  source              = "github.com/wesley-trust/tfmodule-resource_group"
   service_environment = var.service_environment
   service_name        = var.service_name
   service_location    = each.value
