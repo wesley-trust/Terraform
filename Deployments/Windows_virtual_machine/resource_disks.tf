@@ -5,7 +5,7 @@ module "data_disks" {
     azurerm_windows_virtual_machine.virtual_machine
   ]
   count                       = var.resource_instance_count
-  source                      = "../../Resources/Disks"
+  source                      = "github.com/wesley-trust/tfsubmodule-disks"
   resource_location           = module.resource_group.location
   resource_group_name         = module.resource_group.name
   resource_environment        = var.service_environment
