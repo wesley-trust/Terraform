@@ -1,7 +1,7 @@
 # Creation of key vault
 module "key_vault" {
   count                                = var.provision_key_vault ? 1 : 0
-  source                               = "../../Resources/Key_vault"
+  source                               = "github.com/wesley-trust/tfsubmodule-key_vault"
   resource_location                    = module.resource_group.location
   resource_group_name                  = module.resource_group.name
   resource_environment                 = var.service_environment
