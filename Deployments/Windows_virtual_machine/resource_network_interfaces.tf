@@ -7,7 +7,7 @@ module "network_interfaces" {
     ]
 
   count                               = var.resource_instance_count
-  source                              = "../../Resources/Network_interfaces"
+  source                              = "github.com/wesley-trust/tfsubmodule-network_interfaces"
   resource_location                   = module.resource_group.location
   resource_group_name                 = module.resource_group.name
   resource_environment                = var.service_environment

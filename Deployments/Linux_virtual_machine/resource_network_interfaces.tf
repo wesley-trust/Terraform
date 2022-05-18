@@ -4,7 +4,7 @@ module "network_interfaces" {
   # Force explicit dependency to prevent race condition/deadlock in network module
   depends_on                          = [module.service_network]
   count                               = var.resource_instance_count
-  source                              = "../../Resources/Network_interfaces"
+  source                              = "github.com/wesley-trust/tfsubmodule-network_interfaces"
   resource_location                   = module.resource_group.location
   resource_group_name                 = module.resource_group.name
   resource_environment                = var.service_environment
